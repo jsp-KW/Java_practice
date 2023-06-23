@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+public class 스네이크 {
+    public 스네이크() {
+    }
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int SIZE = true;
+        int[][] map = new int[10][10];
+        int[] y = new int[4];
+        int[] x = new int[4];
+        int snake = 4;
+
+        int move;
+        for(move = 0; move < snake; ++move) {
+            x[move] = move;
+            y[move] = 0;
+            map[y[move]][x[move]] = move + 1;
+        }
+
+        while(true) {
+            int nexty;
+            int nextx;
+            do {
+                do {
+                    do {
+                        do {
+                            do {
+                                for(move = 0; move < 10; ++move) {
+                                    for(nexty = 0; nexty < 10; ++nexty) {
+                                        System.out.print(map[move][nexty] + " ");
+                                    }
+
+                                    System.out.println();
+                                }
+
+                                System.out.print("1)left 2)right 3)up 4)down : ");
+                                move = scan.nextInt();
+                                nexty = 0;
+                                nextx = 0;
+                                if (move == 1) {
+                                    nexty = y[0];
+                                    nextx = x[0] - 1;
+                                } else if (move == 2) {
+                                    nexty = y[0];
+                                    nextx = x[0] + 1;
+                                } else if (move == 3) {
+                                    nexty = y[0] - 1;
+                                    nextx = x[0];
+                                } else if (move == 4) {
+                                    nexty = y[0] + 1;
+                                    nextx = x[0];
+                                }
+                            } while(nexty < 0);
+                        } while(nextx < 0);
+                    } while(nexty >= 10);
+                } while(nextx >= 10);
+            } while(map[nexty][nextx] != 0);
+
+            int taily = y[y.length - 1];
+            int tailx = x[x.length - 1];
+            map[taily][tailx] = 0;
+
+            int i;
+            for(i = snake - 1; i > 0; --i) {
+                y[i] = y[i - 1];
+                x[i] = x[i - 1];
+            }
+
+            x[0] = nextx;
+            y[0] = nexty;
+
+            for(i = 0; i < snake; ++i) {
+                map[y[i]][x[i]] = i + 1;
+            }
+        }
+    }
+}
