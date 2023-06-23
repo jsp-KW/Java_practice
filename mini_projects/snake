@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class 스네이크 {
     public 스네이크() {
     }
-
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int SIZE = true;
